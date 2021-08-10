@@ -1,0 +1,52 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h2 class="card-header">Uzņēmuma saraksts (<strong>Neaktīvie</strong>)</h2>
+  <div class="m-3">
+      <a href="{% url 'clients' %}"><button class="btn btn-outline-success btn-sm">skatīties aktīvo klientu sarakstu</button></a>
+  </div>
+  <div class="container">
+    <div class="card mt-10 m-5">
+      {% if client_list %}
+      <div class="m-3">
+        <input class="form-control" id="searchInput" type="text" placeholder="Meklēt...">
+      </div>
+      <table class="table table-striped table-light table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Uzņēmuma nosaukums</th>
+            <th scope="col">TILDE</th>
+          </tr>
+        </thead>
+        <tbody id="companyTable">
+          {% for client in client_list %}
+          <tr>
+            <td>
+              <a href="{{ client.get_absolute_url }}"><button class="btn btn-outline-primary btn-sm">{{ client.company_name }}</button></a>
+            </td>
+            <td>
+              ({{ client.keyword }})
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+    {% else %}
+      <p>Uzņēmuma tabula ir tukša.</p>
+    {% endif %}
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $("#searchInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#companyTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+
+{% endblock %}

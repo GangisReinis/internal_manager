@@ -1,0 +1,34 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<style>
+  #id_post {
+    width:100%;
+    max-width:100%;
+    max-height:100%;    
+    }
+</style>
+  <form method="post">{% csrf_token %}
+    <h3 class="card-header">Tituls: {{form.title}}</h3>
+    <div class="m-3">
+      <div class="row">
+        <div class="modal-dialog-centered">
+          {{form.post}}
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-2">
+            Tag: <strong>{{form.tag}}</strong>
+        </div>
+        <div class="col-2">
+            Flag: <strong>{{form.flag}}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="m-3">
+      <button type="submit" class="btn btn-primary mb-2">Izveidot</button>
+    </div>  
+  </form>
+{% endblock %}

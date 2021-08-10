@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <div class="card modal-dialog-centered">
+    <div class="m-3">
+      <h3 class="card-header">Dzēst artikulu : {{ attr_blog.title }} - {{ attr_blog.user.email }}</h3>
+      <form method="post">{% csrf_token %}
+        <div class="form-group">
+          <div class="card modal-dialog-centered">
+            <label>Vai tiešām vēlaties dzēst<strong> "{{ attr_blog.title }}"</strong> kuru veidoja lietotājs: <strong> {{ attr_blog.user.email }}</strong>?</label>
+            <button type="submit" class="btn btn-primary mb-2">Dzēst</button>
+          </div>
+        </div>
+      </form>        
+    </div>
+  </div>
+{% endblock %}

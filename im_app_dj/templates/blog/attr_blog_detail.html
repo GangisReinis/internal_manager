@@ -1,0 +1,53 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="card-header">
+    <div class="row">
+        <div class="col-10">
+            <h3>{{attr_blog.title}}</h3>
+        </div>
+        <div class="col-2">
+            <a href="update"><button class="btn btn-outline-secondary btn-sm">Labot</button></a>
+            <a href="delete"><button class="btn btn-outline-danger btn-sm">Dzēst</button></a>
+        </div>
+    </div>
+</div>
+<div class="m-3">
+    <p>{{attr_blog.post|safe}}</p>
+</div>
+<div id="appBlog">
+    <div class="card-footer">
+        <div class="row">
+            <div class="col">
+                <strong>[[getDate]]</strong>
+            </div>
+            <div class="col">
+                Lietotājs: <strong>{{attr_blog.user.email}}</strong>
+            </div>
+            <div class="col">
+                Tag: <strong>{{attr_blog.tag}}</strong>
+            </div>
+            <div class="col">
+                Flag: <strong>{{attr_blog.flag}}</strong>
+            </div>
+        </div>
+    </div>
+</div>
+{{ attr_blog.creation_date|json_script:"dateValue" }}
+<script>
+    var vm = new Vue({
+        delimiters: ["[[", "]]"],
+        el: '#appBlog',
+        data: { 
+            dateVariable: ''
+        },
+        computed: {
+            getDate() {
+                dateVariable = JSON.parse(document.getElementById('dateValue').textContent)
+                
+                return moment(String(dateVariable)).format('DD-MM-YYYY hh:mm')
+            }
+        },
+    })
+</script>
+{% endblock %}

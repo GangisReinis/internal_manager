@@ -1,0 +1,54 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+  {% if form.errors %}
+
+      <h4 class="card-header">Jūsu lietotāja vārds nesakrita ar paroli. Lūdzu mēģiniet vēlreiz.</h4>
+
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+
+      <h4 class="card-header">Lietotājam nav piekļuves šai lapai. Lai turpinātu izmantojiet lietotāju ar atbilstošām tiesībām.</h4>
+
+    {% else %}
+   
+      <h4 class="card-header">Lūdzu ievadiet savu lietotāja vārdu un paroli.</h4>
+
+    {% endif %}
+  {% endif %}
+  <div class="container-sm">
+    <div class="m-3">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col">
+          <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <input class="form-control" placeholder="Username" type="text" name="username" autofocus="autofocus" autocapitalize="none" autocomplete="username" maxlength="150" required="required" id="id_username">
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+              <input class="form-control"  type="password" placeholder="Password" name="password" autocomplete="current-password" required="required" id="id_password">
+            </div>
+            <div class="m-3">
+              <button type="submit" class="btn btn-dark">Ienākt</button>
+              
+            </div>
+          </form>
+          <div class="m-3">
+            {# Assumes you setup the password_reset view in your URLconf #}
+            <a href="{% url 'password_reset' %}"><button class="btn btn-outline-secondary mb-2">Atjaunot paroli</button></a>
+          </div>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h2 class="card-header">{{ attr_company.company_name }}</h2>
+  <div class="m-3">
+    <a href="update"><button class="btn btn-outline-secondary btn-sm">Labot datus</button></a>
+  </div>
+  <div class="container">
+    <div class="card mt-10">
+      <table class="table table-striped table-light table-bordered">
+        <thead>
+            <h3 class="card-header">Klientu galvenā Informācija</h3>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="col">Klienta statuss:</th>
+            {% if attr_company.is_not_active == False %}
+            <td>Klients <strong>ir aktīvs</strong></td>
+            {% else %}
+            <td>Client <strong>nav aktīvs</strong></td>
+            {% endif %}
+            <th scope="col">Uzņēmuma juridiskais statuss:</th>
+            <td>{{ attr_company.comp_form }}</td>
+          </tr>
+          <tr>
+            <th scope="col">Reģistrācijas numurs:</th>
+            <td>{{ attr_company.registration_no }}</td>
+            <th scope="col">NILLTFN riska novērtējums</th>
+            <td>{{ attr_company.risk_asses_11 }}</td>
+          </tr>
+          <tr>
+            <th scope="col">Tildes JUMIS:</th>
+            <td>{{ attr_company.keyword }}</td>
+            <th scope="col">2. Darījumu raksturs</th>
+            <td>{{ attr_company.risk_asses_1 }}</td>
+          </tr>
+          <tr>
+            <th scope="col">Deklarētā uzņēmuma adrese:</th>
+            <td>{{ attr_company.main_address }}</td>
+            <th scope="col">3. Personīga tikšanās</th>
+            <td>{{ attr_company.risk_asses_2 }}</td>
+          </tr>
+          <tr>
+            <th scope="col">Faktiskā uzņēmuma adrese:</th>
+            <td>{{ attr_company.post_address }}</td>
+            <th scope="col">4. Politiski nozīmīga persona</th>
+            <td>{{ attr_company.risk_asses_3 }}</td>
+          </tr>
+          <tr>
+            <th scope="col">Bankas IBAN numurs:</th>
+            <td>{{ attr_company.bank_iban }}</td>
+            <th scope="col">5. Vai PLG ir iekļauts sankciju sarakstos?</th>
+            <td>{{ attr_company.risk_asses_4 }}</td>
+          </tr>
+          <tr>
+            <th scope="col">Sadarbības līguma numurs:</th>
+            <td>{{ attr_company.contr_id }}</td>
+            <th scope="col">6. PLG rezidences valsts</th>
+            <td>{{ attr_company.risk_asses_5 }}</td>
+          </tr>
+          <tr>
+            <th scope="col">Dibināšanas datums:</th>
+            <td>{{ attr_company.comp_date|date:"SHORT_DATE_FORMAT" }}</td>
+            <th scope="col">7. Klienta saimnieciskās darbības ilgums</th>
+            <td>{{ attr_company.risk_asses_6 }}</td>
+          </tr>
+          <tr>
+            <th scope="col">PVN datums:</th>
+            <td>{{ attr_company.vat_date|date:"SHORT_DATE_FORMAT" }}</td>
+            <th scope="col">8. Cik ilgi pazīstams PLG</th>
+            <td>{{ attr_company.risk_asses_7 }}</td>
+          </tr>
+          <tr>
+            <th scope="col">MUN periods:</th>
+            <td><strong>no</strong> {{ attr_company.mun_period_from|date:"SHORT_DATE_FORMAT" }} <strong>līdz</strong>  {{ attr_company.mun_period_to|date:"SHORT_DATE_FORMAT" }}</td>
+            <th scope="col">9. Saimnieciskās darbības risks</th>
+            <td>{{ attr_company.risk_asses_8 }}</td>
+          </tr>
+          <tr>
+            <th scope="col">NACE kods:</th>
+            <td>{{ attr_company.nace_code }}</td>
+            <th scope="col">10. Kādās valstīs notiek pakalpojumu sniegšana</th>
+            <td>{{ attr_company.risk_asses_9 }}</td>
+          </tr>
+          <tr>
+            <th scope="col">NACE apraksts:</th>
+            <td>{{ attr_company.nace_desc }}</td>
+            <th scope="col">11. Informācija par amatpersonām masu medijos</th>
+            <td>{{ attr_company.risk_asses_10 }}</td>
+          </tr>
+        </tbody>  
+      </table>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card mt-10">
+      <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+          <h3 class="card-header">Pamatlīdzekļu saraksts:</h3>
+          <div class="m-3">
+            {% if assets %}
+            <ul>
+              {% for asset in assets %}
+              <div class="m-1"><a href="{{ asset.get_absolute_url }}"><button class="btn btn-outline-primary btn-sm">{{ asset.asset_type }}</button></a> ({{asset.asset_id}}) </div>
+              {% endfor %}
+            </ul>
+              {% else %}
+            <p>Pamatlīdzekļu saraksts ir tukšs.</p>
+              {% endif %}
+            <a href="create-new-asset"><button class="btn btn-outline-success btn-sm">pievienot jaunu pamatlīdzekli</button></a>
+          </div>
+        </div>
+        <div class="col-md-auto">
+          <h3 class="card-header">Darbinieku saraksts:</h3>
+          <div class="m-3">
+            {% if employees %}
+            <ul>
+              {% for empl in employees %}
+              <div class="m-1"><a href="{{ empl.get_absolute_url }}"><button class="btn btn-outline-primary btn-sm">{{ empl.employee }}</button></a> ({{empl.role}})</div>
+              {% endfor %}
+            </ul>
+              {% else %}
+            <p>Darbinieku saraksts ir tukšs.</p>
+              {% endif %}
+            <a href="create-new-employee"><button class="btn btn-outline-success btn-sm">pievienot jaunu darbinieku</button></a>
+          </div>
+        </div>
+        <div class="col-md-auto">
+          <h3 class="card-header">Saistītie uzņēmumi:</h3>
+          <div class="m-3">
+            {% if related %}
+            <ul>
+              {% for rel in related %}
+              <div class="m-1"><a href="{{ rel.get_absolute_url }}"><button class="btn btn-outline-primary btn-sm">{{ rel.rel_comp_name }}</button></a> ({{rel.rel_comp_reg}})</div>
+              {% endfor %}
+            </ul>
+              {% else %}
+            <p>Saistošo uzņēmumu saraksts ir tukšs.</p>
+              {% endif %}
+            <a href="create-new-related"><button class="btn btn-outline-success btn-sm">pievienot jaunu saistīto uzņēmumu</button></a>    
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="card mt-10 modal-dialog-centered">
+      <div class="m-3">
+        <a href="delete"><button class="btn btn-outline-danger">Dzēst klienta datus</button></a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

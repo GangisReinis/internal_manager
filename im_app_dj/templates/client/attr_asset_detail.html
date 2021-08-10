@@ -1,0 +1,42 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h3 class="card-header"><a href="/clients/{{ attr_asset.company.slug }}"><button class="btn btn-outline-secondary">{{ attr_asset.company.company_name }}</button></a></h3>
+  <div class="m-3">
+    <a href="update"><button class="btn btn-outline-secondary btn-sm">Labot datus</button></a>
+  </div>
+  <div class="container">
+    <div class="card mt-10">
+      <div class="row justify-content-md-left">
+        <div class="col-md-auto">
+          <table class="table table-striped table-light table-bordered">
+            <thead>
+              <h5 class="card-header">Informācija par pamatlīdzekli</h5>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Pamatlīdzekļu tips:</th>
+                <td>{{ attr_asset.asset_type }}</td>
+              </td>
+              <tr>
+                <th>Pamatlīdzekļu id numurs:</th>
+                <td>{{ attr_asset.asset_id }}</td>
+              </td>
+              <tr>
+                <th>Pamatlīdzekļa līuguma numurus:</th>
+                <td>{{ attr_asset.asset_contr_id }}</td>
+              </td>
+              <tr>
+                <th>Pamatlīdzekļu apraksts:</th>
+                <td>{{ attr_asset.asset_desc }}</td>
+              </td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="m-3">
+    <a href="delete"><button class="btn btn-outline-danger">Dzēst pamatlīdzekļa datus</button></a>
+  </div>
+{% endblock %}

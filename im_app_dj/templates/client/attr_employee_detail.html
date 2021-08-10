@@ -1,0 +1,72 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h3 class="card-header"><a href="/clients/{{ attr_employee.company.slug }}"><button class="btn btn-outline-secondary">{{ attr_employee.company.company_name }}</button></a> - {{ attr_employee.employee }} </h3>
+<div class="m-3">
+  <a href="employee-{{ attr_employee.id }}/update"><button class="btn btn-outline-secondary btn-sm">Labot datus</button></a>
+</div>
+<div class="container">
+  <div class="card mt-10">
+    <div class="row justify-content-md-left">
+      <div class="col-md-auto">
+        <table class="table table-striped table-light table-bordered">
+          <thead>
+            <h5 class="card-header">Informācija par darbinieku</h5>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Darbinieka pilnais vārds:</th>
+              <td>{{ attr_employee.employee }}</td>
+            </tr>
+            <tr>
+              <th>Darbinieka amats:</th>
+              <td>{{ attr_employee.role }}</td>
+            </tr>
+            <tr>
+              <th>Darbinieka epasts:</th>
+              <td>{{ attr_employee.email }}</td>
+            </tr>
+            <tr>
+              <th>Darbinieka telefona numurs:</th>
+              <td>{{ attr_employee.tele }}</td>
+            </tr>
+            <tr>
+              <th>Ir valdes loceklis:</th>
+              <td>
+                {% if attr_employee.is_board == False %}
+                Nē
+                {% else %}
+                Jā
+                {% endif %}
+              </td>
+            </tr>
+            <tr>
+              <th>Ir akciju turētājs:</th>
+              <td>
+                {% if attr_employee.is_sh_holder == False %}
+                Nē
+                {% else %}
+                Jā
+                {% endif %}  
+              </td>
+            </tr>
+            <tr>
+              <th>Ir patiesais labuma guvējs:</th>
+              <td>
+                {% if attr_employee.is_main_benf == False %}
+                Nē
+                {% else %}
+                Jā
+                {% endif %}  
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="m-3">
+  <a href="employee-{{ attr_employee.id }}/delete"><button class="btn btn-outline-danger">Dzēst pamatlīdzekļa datus</button></a>
+</div>
+{% endblock %}

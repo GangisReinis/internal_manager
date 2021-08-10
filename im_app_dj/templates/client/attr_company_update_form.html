@@ -1,0 +1,119 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h3 class="card-header">Labot : {{ attr_company.company_name }}</h3>
+
+  <div class="card mt-10">
+    <form method="post">{% csrf_token %}
+      <div class="m-3">
+        <table class="table table-striped table-light table-bordered">
+          <thead>
+            <h5 class="card-header">Veikt labojumus. Obligātie lauki ir atzīmēti ar zvaigznīti '*'</h5>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Klients nav aktīvs:</th>
+              <td>{{ form.is_not_active }}</td>
+              <th></th>
+              <td></td>
+            </tr>
+            <tr>
+              <th>Klienta nosaukums (*):</th>
+              <td>{{ form.company_name }}</td>
+  
+              <th>Uzņēmuma juridiskais statuss:</th>
+              <td>{{ form.comp_form }}</td>
+            </tr>
+            <tr>
+              <th>Reģistrācijas numurs (*):</th>
+              <td>{{ form.registration_no }}</td>
+              
+              <th>2. Darījumu raksturs</th>
+              <td>{{ form.risk_asses_1 }}</td>  
+            </tr>
+            <tr>
+              <th>Tildes JUMIS:</th>
+              <td>{{ form.keyword }}</td>
+              
+              <th>3. Personīga tikšanās</th>
+              <td>{{ form.risk_asses_2 }}</td>  
+            </tr>
+            <tr>
+              <th>Deklarētā uzņēmuma adrese (*):</th>
+              <td>{{ form.main_address }}</td>
+              
+              <th>4. Politiski nozīmīga persona</th>
+              <td>{{ form.risk_asses_3 }}</td>  
+            </tr>
+            <tr>
+              <th>Faktiskā uzņēmuma adrese:</th>
+              <td>{{ form.post_address }}</td>
+              
+              <th>5. Vai PLG ir iekļauts sankciju sarakstos?</th>
+              <td>{{ form.risk_asses_4 }}</td>  
+            </tr>
+            <tr>
+              <th>Bankas IBAN numurs:</th>
+              <td>{{ form.bank_iban }}</td>
+              
+              <th>6. PLG rezidences valsts</th>
+              <td>{{ form.risk_asses_5 }}</td>  
+            </tr>
+            <tr>
+              <th>Sadarbības līguma numurs:</th>
+              <td>{{ form.contr_id }}</td>
+              
+              <th>7. Klienta saimnieciskās darbības ilgums</th>
+              <td>{{ form.risk_asses_6 }}</td>  
+            </tr>
+            <tr>
+              <th>Dibināšanas datums:</th>
+              <td>{{ form.comp_date }}</td>
+              
+              <th>8. Cik ilgi pazīstams PLG</th>
+              <td>{{ form.risk_asses_7 }}</td>  
+            </tr>
+            <tr>
+              <th>PVN datums:</th>
+              <td>{{ form.vat_date }}</td>
+              
+              <th>9. Saimnieciskās darbības risks</th>
+              <td>{{ form.risk_asses_8 }}</td>  
+            </tr>
+            <tr>
+              <th>MUN periods no:</th>
+              <td>{{ form.mun_period_from }}</td>
+              
+              <th>10. Kādās valstīs notiek pakalpojumu sniegšana</th>
+              <td>{{ form.risk_asses_9 }}</td>  
+            </tr>
+            <tr>
+              <th>MUN periods līdz:</th>
+              <td>{{ form.mun_period_to }}</td>
+              
+              <th>11. Informācija par amatpersonām masu medijos</th>
+              <td>{{ form.risk_asses_10 }}</td>  
+            </tr>
+            <tr>
+              <th>NACE kods:</th>
+              <td>{{ form.nace_code }}</td>
+              
+              <th>NILLTFN riska novērtējums</th>
+              <td>{{ form.risk_asses_11 }}</td>  
+            </tr>
+            <tr>
+              <th>NACE apraksts:</th>
+              <td>{{ form.nace_desc }}</td>
+              
+              <th></th>
+              <td></td>  
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="m-3">
+        <button type="submit" class="btn btn-primary mb-2">Saglabāt</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

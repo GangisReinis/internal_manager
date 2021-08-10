@@ -1,0 +1,89 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+
+  <div id="app">
+    {% if user.is_authenticated == False %}
+      <h1 class="card-header">Content for internal use only!</h1>
+    {% else %}
+    <h1 class="card-header">Artikulu saraksts</h1>
+    <div class="container">
+      <div class="card mt-5">
+        <div class="m-3">
+          <div class="row">
+            <div class="col-10">
+              <input type="text" v-model="search" class="form-control" placeholder="Meklēt artikula titulu...">
+            </div>
+            <div class="col-2">
+              <a href="/blog/create-new/"><button class="btn btn-outline-success btn-sm">Izveidot jaunu artikulu</button></a>
+            </div>
+          </div>
+        </div>
+        <div class="container"  v-for="post in filteredList" :key="post.id">
+          <div class="card mt-5">
+            <div class="m-3">
+              <div class="row card-header">
+                <div class="col-4">Izveidots: <strong>[[post.creation_date | formatDateTime]]</strong></div>
+                <div class="col-8"><a :href="'/blog/' + post.id"><button class="btn btn-outline-secondary btn-lg">Artikuls -> [[post.title]]</button></a></div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <p>Lietotājs: <strong>[[post.user]]</strong></p>
+                  <p>Tag: <strong>[[post.tag]]</strong></p>
+                  <p>Flag: <strong>[[post.flag]]</strong></p>
+                </div>
+                <div class="col-8">
+                  <p><span v-html="post.post.substring(0,10)"></span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+
+<script>  
+  var vm = new Vue({
+    delimiters: ["[[", "]]"],
+    el: '#app',
+    data: {
+      search: '',
+      posts: [],
+    },
+    computed: {
+      numPosts: function() {
+        return this.posts.length
+      },
+      filteredList() {
+        return this.posts.filter(post => {
+          return post.title.toLowerCase().includes(this.search.toLowerCase())
+        })
+      },
+    },
+    created: function() {
+      this.fetchPosts()
+    },
+    methods: {
+      fetchPosts: function() {
+        var url = 'http://127.0.0.1:8000/api/blog/'
+        axios.get(url)
+          .then( function(response) {
+            vm.posts = response.data
+          })
+      },
+    },
+
+  })
+</script>
+
+
+
+
+{% endif %}
+{% endblock %}
