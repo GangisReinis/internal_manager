@@ -45,10 +45,10 @@
           </div>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
 
-<script>  
+<script>
   var vm = new Vue({
     delimiters: ["[[", "]]"],
     el: '#app',
@@ -71,7 +71,7 @@
     },
     methods: {
       fetchPosts: function() {
-        var url = 'http://127.0.0.1:8000/api/blog/'
+        var url = 'https://squirtologs.pythonanywhere.com/api/blog/'
         axios.get(url)
           .then( function(response) {
             vm.posts = response.data

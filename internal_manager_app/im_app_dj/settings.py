@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-y9w9f+iq#1#%=gwax@)6t*nwyk9ot1i_@b*ff-f7)*u7bz7pkq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['squirtologs.pythonanywhere.com']
 
 
 # Application definition
@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    # 'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
     'tinymce',
@@ -89,6 +89,12 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
 
 ROOT_URLCONF = 'im_app_dj.urls'
 
@@ -166,13 +172,15 @@ TIME_INPUT_FORMATS = ['%H:%M','%H:%M:%S','%H:%M:%S.%f']
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static/"),
+    os.path.join(BASE_DIR, "/static/admin"),
+    os.path.join(BASE_DIR, "/static/app"),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static/admin/")
 
 LOGIN_REDIRECT_URL = 'index'
 
