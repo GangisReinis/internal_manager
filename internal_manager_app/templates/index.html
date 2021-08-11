@@ -48,8 +48,9 @@
     </div>
   </div>
 
+
 <script>
-  var vm = new Vue({
+var vm = new Vue({
     delimiters: ["[[", "]]"],
     el: '#app',
     data: {
@@ -76,14 +77,14 @@
           .then( function(response) {
             vm.posts = response.data
           })
+          .catch(err => {
+              console.log(err)
+          })
       },
     },
 
   })
 </script>
-
-
-
 
 {% endif %}
 {% endblock %}
