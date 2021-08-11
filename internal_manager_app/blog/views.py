@@ -17,6 +17,7 @@ class CreateBlog(LoginRequiredMixin,generic.edit.CreateView):
     model = attr_blog
     fields = [
         "title",
+        "description",
         "post",
         "tag",
         "flag"
@@ -30,13 +31,13 @@ class UpdateBlog(LoginRequiredMixin,generic.edit.UpdateView):
     model = attr_blog
     fields = [
         "title",
+        "description",
         "post",
         "tag",
         "flag"
     ]
 
     template_name_suffix = '_update_form'
-
 
 class DeleteBlog(LoginRequiredMixin,generic.edit.DeleteView):
     model = attr_blog

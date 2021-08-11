@@ -38,7 +38,7 @@
                   <p>Flag: <strong>[[post.flag]]</strong></p>
                 </div>
                 <div class="col-8">
-                  <p><span v-html="post.post.substring(0,10)"></span></p>
+                  <p><span v-html="post.description.substring(0,300)"></span></p>
                 </div>
               </div>
             </div>
@@ -73,6 +73,7 @@ var vm = new Vue({
     methods: {
       fetchPosts: function() {
         var url = 'https://squirtologs.pythonanywhere.com/api/blog/'
+        // var url = 'http://127.0.0.1:8000/api/blog/'        
         axios.get(url)
           .then( function(response) {
             vm.posts = response.data

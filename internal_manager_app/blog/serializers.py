@@ -22,7 +22,7 @@ class BlogSerializer(serializers.ModelSerializer):
             "user",
             "creation_date",
             "title",
-            "post",
+            "description",
             "tag",
             "flag"
         )

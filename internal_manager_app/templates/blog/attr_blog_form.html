@@ -4,25 +4,38 @@
 <style>
   #id_post {
     width:100%;
+    height: 500px;
     max-width:100%;
     max-height:100%;    
     }
+  #id_description {
+    width: 100%;
+    height: 80px;
+    max-width: 100%;
+    max-height: 100px;
+  }
+  #id_title {
+    width: 90%;
+  }
 </style>
   <form method="post">{% csrf_token %}
     <h3 class="card-header">Tituls: {{form.title}}</h3>
     <div class="m-3">
+      <h4>Artikula apraksts:</h4>
+      {{form.description}}
+    </div>
+    <div class="m-3">
       <div class="row">
-        <div class="modal-dialog-centered">
+        <div class="col">
+          <h4>Artikula saturs:</h4>
           {{form.post}}
         </div>
       </div>
     </div>
     <div class="card-footer">
       <div class="row">
-        <div class="col-2">
+        <div class="col-4">
             Tag: <strong>{{form.tag}}</strong>
-        </div>
-        <div class="col-2">
             Flag: <strong>{{form.flag}}</strong>
         </div>
       </div>
@@ -31,4 +44,11 @@
       <button type="submit" class="btn btn-primary mb-2">Izveidot</button>
     </div>  
   </form>
+
+  <script>
+    tinymce.init({
+      selector: '#id_post'
+    });
+  </script>
+
 {% endblock %}

@@ -1,7 +1,6 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
-from tinymce.models import HTMLField
 
 class attr_tag(models.Model):
     name = models.CharField(max_length=50)
@@ -18,8 +17,9 @@ class attr_flag(models.Model):
 class attr_blog(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING,)
     creation_date = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=255)
-    post = HTMLField(null=True, blank=True,)
+    title = models.CharField(max_length=100)
+    description = models.TextField(max_length=300, null=True, blank=True)
+    post = models.TextField(max_length=5000, null=True, blank=True)
     tag  = models.ForeignKey(attr_tag, on_delete=models.DO_NOTHING)
     flag = models.ForeignKey(attr_flag, on_delete=models.DO_NOTHING)
     
