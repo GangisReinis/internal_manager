@@ -3,11 +3,10 @@
 {% block content %}
   <h2 class="card-header">Uzņēmuma saraksts (<strong>Aktīvie</strong>)</h2>
   <div class="m-3">
-      <a href="{% url 'client-create' %}"><button class="btn btn-outline-success btn-sm">izveidot jaunu klientu</button></a> 
+      <a href="{% url 'client-create' %}"><button class="btn btn-outline-success btn-sm">izveidot jaunu klientu</button></a>
       <a href="{% url 'NA-clients' %}"><button class="btn btn-outline-danger btn-sm">skatīties neaktīvo klientu sarakstu</button></a>
   </div>
   <div class="container">
-    <div class="card mt-10 m-5">
       {% if client_list %}
       <div class="m-3">
         <input class="form-control" id="searchInput" type="text" placeholder="Meklēt...">
@@ -32,11 +31,10 @@
           {% endfor %}
         </tbody>
       </table>
-      
+
     {% else %}
       <p>Uzņēmuma tabula ir tukša.</p>
     {% endif %}
-    </div>
   </div>
 
   <script>

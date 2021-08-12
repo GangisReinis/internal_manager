@@ -12,19 +12,18 @@
       <h1 class="card-header">Content for internal use only!</h1>
     {% else %}
     <h1 class="card-header">Artikulu saraksts</h1>
-    <div class="container">
-      <div class="card mt-5">
-        <div class="m-3">
-          <div class="row">
-            <div class="col-10">
-              <input type="text" v-model="search" class="form-control" placeholder="Meklēt artikula titulu...">
-            </div>
-            <div class="col-2">
-              <a href="/blog/create-new/"><button class="btn btn-outline-success btn-sm">Izveidot jaunu artikulu</button></a>
-            </div>
-          </div>
+    <div class="m-3">
+      <div class="row">
+        <div class="col-10">
+          <input type="text" v-model="search" class="form-control" placeholder="Meklēt artikula titulu...">
         </div>
-        <div class="container"  v-for="post in filteredList" :key="post.id">
+        <div class="col-2">
+          <a href="/blog/create-new/"><button class="btn btn-outline-success btn-sm">Izveidot jaunu artikulu</button></a>
+        </div>
+      </div>
+    </div>
+    <div class="container"  v-for="post in filteredList" :key="post.id">
+      <div class="m-3">
           <div class="card mt-5">
             <div class="m-3">
               <div class="row card-header">
@@ -43,7 +42,6 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -73,7 +71,7 @@ var vm = new Vue({
     methods: {
       fetchPosts: function() {
         var url = 'https://squirtologs.pythonanywhere.com/api/blog/'
-        // var url = 'http://127.0.0.1:8000/api/blog/'        
+        // var url = 'http://127.0.0.1:8000/api/blog/'
         axios.get(url)
           .then( function(response) {
             vm.posts = response.data

@@ -6,7 +6,6 @@
       <a href="{% url 'clients' %}"><button class="btn btn-outline-success btn-sm">skatīties aktīvo klientu sarakstu</button></a>
   </div>
   <div class="container">
-    <div class="card mt-10 m-5">
       {% if client_list %}
       <div class="m-3">
         <input class="form-control" id="searchInput" type="text" placeholder="Meklēt...">
@@ -31,11 +30,10 @@
           {% endfor %}
         </tbody>
       </table>
-      
+
     {% else %}
       <p>Uzņēmuma tabula ir tukša.</p>
     {% endif %}
-    </div>
   </div>
 
   <script>

@@ -2,9 +2,15 @@
 <html lang="en">
   <head>
     {% load i18n static %}
-    {% block title %}<title>Application Manager</title>{% endblock %}
+    {% block title %}
+    {% if user.is_authenticated %}
+    <title>Accounting Art | {{ user.email }}</title>
+    {% else %}
+    <title>Welcome to internal manager</title>
+    {% endif %}
+    {% endblock %}
     {% load static %}
-    
+
     <script src="https://cdn.tiny.cloud/1/tnamv1tu8i6akxngw3at6vmseue1pkbkoejkjb4mpmf5sfg2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -14,9 +20,10 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/starter-template/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  </head> 
+  </head>
   <style>
     .navbar-nav {
       float:none;
@@ -28,7 +35,14 @@
     .navbar-nav > li {
       display: inline-block;
       float:none;
-    }  
+    }
+    .position{
+      align-items: center;
+      height:50px;
+    }
+    .position span{
+      line-height:50px;
+    }
   </style>
   <body>
     <div class="container">
@@ -49,7 +63,7 @@
                     <a class="nav-link" href="#">Laika Tabula</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="">Issue Tracker</a>
+                    <a class="nav-link" href="#">Issue Tracker</a>
                   </li>
                   {% elif user.is_authenticated and user.is_staff %}
                   <li class="nav-item">
@@ -59,24 +73,27 @@
                     <a class="nav-link" href="#">Laika Tabula</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="">Issue Tracker</a>
+                    <a class="nav-link" href="#">Issue Tracker</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin:index' %}">Adminstrātors</a></a>
+                    <a class="nav-link" href="{% url 'admin:index' %}">Administrātors</a></a>
                   </li>
                   {% endif %}
                 </ul>
                 <ul class="nav navbar-nav navbar-righ">
                   <li class="nav-item">
                     {% if user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'logout'%}?next={{request.path}}"><button class="btn btn-outline-danger">Log out</button></a>
+                    <div class="position" style="float:left; display:flex;">
+                        <span style="display:inline;"><a class="nav-link" href="{% url 'logout'%}?next={{request.path}}"><button id="logoutBtn" class="btn btn-outline-danger">Log out</button></a></span>
+                        <span class="badge badge-primary" style="display:inline;">{{ user.email }}</span>
+                    </div>
                     {% else %}
                     <a class="nav-link" href="{% url 'login'%}?next={{request.path}}"><button class="btn btn-outline-success">Log in</button></a>
                     {% endif %}
                   </li>
-                </ul>          
+                </ul>
               </div>
-            </div>  
+            </div>
           </div>
         </nav>
       </div>
